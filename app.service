@@ -1,0 +1,17 @@
+[Unit]
+Description=Java Application Service
+
+[Service]
+# avoid running as root, apps that run on 80 must be run as root
+User=ec2-user
+# The configuration file application.properties should be here:
+WorkingDirectory=/home/ec2-user
+# to limit JVM ram use -Xmx512m, or the value you prefer
+ExecStart=/usr/bin/java -jar /home/ec2-user/couponservice-0.0.1-SNAPSHOT.jar
+SuccessExitStatus=143
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
